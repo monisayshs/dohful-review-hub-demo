@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dohful Cookies &amp; Coffee — Review Your Store</title>
+<meta name="description" content="Pick your Dohful store and leave a Google review. One page for every Dohful Cookies & Coffee store.">
+<style>
+  :root {
+    --cream: #FAF3E6;
+    --paper: #FFFDF7;
+    --brown: #3B2416;
+    --brown-soft: #6B4A2F;
+    --caramel: #B06A21;
+    --caramel-dark: #8F5314;
+    --line: #E7D9BE;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: clip; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    line-height: 1.45;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 40px; }
+  header { text-align: center; padding: 34px 8px 6px; }
+  .brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem; font-weight: 700; letter-spacing: .2px; color: var(--brown);
+  }
+  .brand span { color: var(--caramel); }
+  .tagline { margin-top: 8px; font-size: 1.02rem; color: var(--brown-soft); }
+  .steps {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    margin: 18px 0 4px; font-size: .86rem; color: var(--brown-soft);
+  }
+  .steps div { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+  .steps b { color: var(--caramel-dark); }
+  .searchbox { margin: 18px 0 6px; }
+  .searchbox input {
+    width: 100%; padding: 13px 16px; font-size: 1rem;
+    border: 1.5px solid var(--line); border-radius: var(--radius);
+    background: var(--paper); color: var(--brown); outline: none;
+  }
+  .searchbox input:focus { border-color: var(--caramel); box-shadow: 0 0 0 3px rgba(176,106,33,.18); }
+  .socials { display: flex; gap: 10px; justify-content: center; margin: 14px 0 4px; flex-wrap: wrap; }
+  .socials a {
+    text-decoration: none; font-size: .92rem; font-weight: 600;
+    color: var(--brown); background: var(--paper);
+    border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px;
+  }
+  .socials a:focus-visible, .review-btn:focus-visible { outline: 3px solid var(--caramel); outline-offset: 2px; }
+  .city { margin-top: 26px; }
+  .city h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: baseline; gap: 10px;
+  }
+  .city h2 .count { font-family: inherit; font-size: .82rem; color: var(--brown-soft); font-weight: 400; }
+  .stores { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .store {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+  .store-info { display: flex; flex-direction: column; min-width: 0; }
+  .store-name { font-weight: 700; font-size: .98rem; }
+  .store-area { font-size: .84rem; color: var(--brown-soft); }
+  .review-btn {
+    flex-shrink: 0; text-decoration: none; font-weight: 700; font-size: .88rem;
+    background: var(--caramel); color: #fff; border-radius: 10px; padding: 10px 14px;
+  }
+  .review-btn:hover { background: var(--caramel-dark); }
+  .noresults { display: none; text-align: center; color: var(--brown-soft); padding: 22px 0 4px; }
+  .demo {
+    margin-top: 34px; background: #F3E7CF; border: 1.5px dashed var(--caramel);
+    border-radius: var(--radius); padding: 18px;
+  }
+  .demo h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; margin-bottom: 6px; }
+  .demo p { font-size: .92rem; color: var(--brown-soft); margin-bottom: 12px; }
+  .demo .fields { display: flex; flex-direction: column; gap: 8px; }
+  .demo input {
+    padding: 12px 14px; font-size: .95rem; border: 1.5px solid var(--line);
+    border-radius: 10px; background: var(--paper); color: var(--brown);
+  }
+  .demo .note { margin: 10px 0 0; font-size: .8rem; }
+  footer { text-align: center; margin-top: 30px; font-size: .8rem; color: var(--brown-soft); }
+  @media (max-width: 420px) {
+    .brand { font-size: 1.65rem; }
+    .review-btn { padding: 9px 11px; font-size: .83rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Dohful <span>Cookies &amp; Coffee</span></div>
+    <p class="tagline">Loved your cookies? Review your store — it takes 30 seconds.</p>
+    <div class="steps">
+      <div><b>1.</b> Find your store below</div>
+      <div><b>2.</b> Tap “Review on Google”</div>
+      <div><b>3.</b> Share your love</div>
+    </div>
+  </header>
+
+  <div class="searchbox">
+    <input type="search" id="search" placeholder="Search store or area — Saket, CyberHub, Whitefield" aria-label="Search stores">
+  </div>
+
+  <div class="socials">
+    <a href="https://www.instagram.com/dohfulcookies" target="_blank" rel="noopener">Instagram — @dohfulcookies</a>
+    <a href="https://dohful.com" target="_blank" rel="noopener">Order online — dohful.com</a>
+  </div>
+
+  <main id="list">
+    <section class="city" data-city="Delhi">
+      <h2>Delhi <span class="count">13 stores</span></h2>
+      <ul class="stores">
+        <li class="store" data-search="hauz khas hauz khas delhi">
+          <div class="store-info">
+            <span class="store-name">Hauz Khas</span>
+            <span class="store-area">Hauz Khas · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Hauz+Khas+Hauz+Khas+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="south court saket delhi">
+          <div class="store-info">
+            <span class="store-name">South Court</span>
+            <span class="store-area">Saket · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+South+Court+Saket+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="dlf avenue saket delhi">
+          <div class="store-info">
+            <span class="store-name">DLF Avenue</span>
+            <span class="store-area">Saket · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+DLF+Avenue+Saket+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="satya niketan satya niketan, moti bagh 2 delhi">
+          <div class="store-info">
+            <span class="store-name">Satya Niketan</span>
+            <span class="store-area">Satya Niketan, Moti Bagh 2 · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Satya+Niketan+Satya+Niketan%2C+Moti+Bagh+2+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="gk 2 greater kailash 2 delhi">
+          <div class="store-info">
+            <span class="store-name">GK 2</span>
+            <span class="store-area">Greater Kailash 2 · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+GK+2+Greater+Kailash+2+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="nehru place nehru place delhi">
+          <div class="store-info">
+            <span class="store-name">Nehru Place</span>
+            <span class="store-area">Nehru Place · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Nehru+Place+Nehru+Place+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="hl plaza dwarka dwarka, sector 12 delhi">
+          <div class="store-info">
+            <span class="store-name">HL Plaza Dwarka</span>
+            <span class="store-area">Dwarka, Sector 12 · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+HL+Plaza+Dwarka+Dwarka%2C+Sector+12+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="ambience mall vasant kunj delhi">
+          <div class="store-info">
+            <span class="store-name">Ambience Mall</span>
+            <span class="store-area">Vasant Kunj · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Ambience+Mall+Vasant+Kunj+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="worldmark aerocity delhi">
+          <div class="store-info">
+            <span class="store-name">Worldmark</span>
+            <span class="store-area">Aerocity · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Worldmark+Aerocity+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="unity one janakpuri janakpuri delhi">
+          <div class="store-info">
+            <span class="store-name">Unity One Janakpuri</span>
+            <span class="store-area">Janakpuri · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Unity+One+Janakpuri+Janakpuri+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="north campus north campus, delhi university delhi">
+          <div class="store-info">
+            <span class="store-name">North Campus</span>
+            <span class="store-area">North Campus, Delhi University · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+North+Campus+North+Campus%2C+Delhi+University+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="ansari nagar ansari nagar delhi">
+          <div class="store-info">
+            <span class="store-name">Ansari Nagar</span>
+            <span class="store-area">Ansari Nagar · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Ansari+Nagar+Ansari+Nagar+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="kamla nagar (delivery kitchen) kamla nagar delhi">
+          <div class="store-info">
+            <span class="store-name">Kamla Nagar (delivery kitchen)</span>
+            <span class="store-area">Kamla Nagar · Delhi</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Kamla+Nagar+%28delivery+kitchen%29+Kamla+Nagar+Delhi" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+      </ul>
+    </section>
+    <section class="city" data-city="Gurugram">
+      <h2>Gurugram <span class="count">10 stores</span></h2>
+      <ul class="stores">
+        <li class="store" data-search="cyber park udyog vihar gurugram">
+          <div class="store-info">
+            <span class="store-name">Cyber Park</span>
+            <span class="store-area">Udyog Vihar · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Cyber+Park+Udyog+Vihar+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="cyber greens dlf phase 3 / cyber city gurugram">
+          <div class="store-info">
+            <span class="store-name">Cyber Greens</span>
+            <span class="store-area">DLF Phase 3 / Cyber City · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Cyber+Greens+DLF+Phase+3+%2F+Cyber+City+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="cyberhub cyber city gurugram">
+          <div class="store-info">
+            <span class="store-name">CyberHub</span>
+            <span class="store-area">Cyber City · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+CyberHub+Cyber+City+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="world tech park sector 30 (huda city centre side) gurugram">
+          <div class="store-info">
+            <span class="store-name">World Tech Park</span>
+            <span class="store-area">Sector 30 (HUDA City Centre side) · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+World+Tech+Park+Sector+30+%28HUDA+City+Centre+side%29+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="huda city centre metro huda city centre gurugram">
+          <div class="store-info">
+            <span class="store-name">HUDA City Centre Metro</span>
+            <span class="store-area">HUDA City Centre · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+HUDA+City+Centre+Metro+HUDA+City+Centre+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="vatika business park sohna road gurugram">
+          <div class="store-info">
+            <span class="store-name">Vatika Business Park</span>
+            <span class="store-area">Sohna Road · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Vatika+Business+Park+Sohna+Road+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="magnum golf course extension road gurugram">
+          <div class="store-info">
+            <span class="store-name">Magnum</span>
+            <span class="store-area">Golf Course Extension Road · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Magnum+Golf+Course+Extension+Road+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="imperia mindspace sector 62 gurugram">
+          <div class="store-info">
+            <span class="store-name">Imperia Mindspace</span>
+            <span class="store-area">Sector 62 · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Imperia+Mindspace+Sector+62+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="atrium place atrium place gurugram">
+          <div class="store-info">
+            <span class="store-name">Atrium Place</span>
+            <span class="store-area">Atrium Place · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Atrium+Place+Atrium+Place+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="pioneer park pioneer park gurugram">
+          <div class="store-info">
+            <span class="store-name">Pioneer Park</span>
+            <span class="store-area">Pioneer Park · Gurugram</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Pioneer+Park+Pioneer+Park+Gurugram" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+      </ul>
+    </section>
+    <section class="city" data-city="Noida">
+      <h2>Noida <span class="count">7 stores</span></h2>
+      <ul class="stores">
+        <li class="store" data-search="noida electronic city sector 62 / electronic city noida">
+          <div class="store-info">
+            <span class="store-name">Noida Electronic City</span>
+            <span class="store-area">Sector 62 / Electronic City · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Noida+Electronic+City+Sector+62+%2F+Electronic+City+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="sector 63 sector 63 noida">
+          <div class="store-info">
+            <span class="store-name">Sector 63</span>
+            <span class="store-area">Sector 63 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Sector+63+Sector+63+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="max towers sector 16 noida">
+          <div class="store-info">
+            <span class="store-name">Max Towers</span>
+            <span class="store-area">Sector 16 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Max+Towers+Sector+16+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="dlf mall of india sector 18 noida">
+          <div class="store-info">
+            <span class="store-name">DLF Mall of India</span>
+            <span class="store-area">Sector 18 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+DLF+Mall+of+India+Sector+18+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="embassy oxygen sector 62 noida">
+          <div class="store-info">
+            <span class="store-name">Embassy Oxygen</span>
+            <span class="store-area">Sector 62 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Embassy+Oxygen+Sector+62+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="sector 6 sector 6 noida">
+          <div class="store-info">
+            <span class="store-name">Sector 6</span>
+            <span class="store-area">Sector 6 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Sector+6+Sector+6+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="hush food mall (delivery listing) sector 111 noida">
+          <div class="store-info">
+            <span class="store-name">Hush Food Mall (delivery listing)</span>
+            <span class="store-area">Sector 111 · Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Hush+Food+Mall+%28delivery+listing%29+Sector+111+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+      </ul>
+    </section>
+    <section class="city" data-city="Greater Noida">
+      <h2>Greater Noida <span class="count">3 stores</span></h2>
+      <ul class="stores">
+        <li class="store" data-search="india expo plaza knowledge park / expo mart side greater noida">
+          <div class="store-info">
+            <span class="store-name">India Expo Plaza</span>
+            <span class="store-area">Knowledge Park / Expo Mart side · Greater Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+India+Expo+Plaza+Knowledge+Park+%2F+Expo+Mart+side+Greater+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="sun twilight mall sector 27 greater noida">
+          <div class="store-info">
+            <span class="store-name">Sun Twilight Mall</span>
+            <span class="store-area">Sector 27 · Greater Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Sun+Twilight+Mall+Sector+27+Greater+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="lambda 1 lambda 1 greater noida">
+          <div class="store-info">
+            <span class="store-name">Lambda 1</span>
+            <span class="store-area">Lambda 1 · Greater Noida</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Lambda+1+Lambda+1+Greater+Noida" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+      </ul>
+    </section>
+    <section class="city" data-city="Bengaluru">
+      <h2>Bengaluru <span class="count">2 stores</span></h2>
+      <ul class="stores">
+        <li class="store" data-search="divyashree litbox whitefield bengaluru">
+          <div class="store-info">
+            <span class="store-name">Divyashree Litbox</span>
+            <span class="store-area">Whitefield · Bengaluru</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Divyashree+Litbox+Whitefield+Bengaluru" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+        <li class="store" data-search="nexus shantiniketan whitefield bengaluru">
+          <div class="store-info">
+            <span class="store-name">Nexus Shantiniketan</span>
+            <span class="store-area">Whitefield · Bengaluru</span>
+          </div>
+          <a class="review-btn" href="https://www.google.com/maps/search/Dohful+Cookies+%26+Coffee+Nexus+Shantiniketan+Whitefield+Bengaluru" target="_blank" rel="noopener">Review on Google</a>
+        </li>
+      </ul>
+    </section>
+    <p class="noresults" id="noresults">No store matches that search. Try an area name like Saket, CyberHub or Whitefield.</p>
+  </main>
+
+  <section class="demo" aria-label="Demo preview">
+    <h2>Get offers on WhatsApp</h2>
+    <p><strong>Demo — how it will work:</strong> in the live version, customers can leave their name and mobile number here. Dohful then sends them new-cookie alerts and offers on WhatsApp — and happy customers come back more often.</p>
+    <div class="fields">
+      <input type="text" placeholder="Your name" disabled>
+      <input type="tel" placeholder="Mobile number" disabled>
+    </div>
+    <p class="note">Demo preview only — this form is not live and does not collect or store anything yet.</p>
+  </section>
+
+  <footer>
+    <p>35 Dohful stores · Delhi · Gurugram · Noida · Greater Noida · Bengaluru</p>
+    <p style="margin-top:6px;">Demo made for Dohful by @webxpert.ai</p>
+  </footer>
+</div>
+<script>
+  var input = document.getElementById('search');
+  var noresults = document.getElementById('noresults');
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    var anyVisible = false;
+    document.querySelectorAll('.city').forEach(function (sec) {
+      var secVisible = false;
+      sec.querySelectorAll('.store').forEach(function (row) {
+        var show = !q || row.getAttribute('data-search').indexOf(q) !== -1;
+        row.style.display = show ? '' : 'none';
+        if (show) secVisible = true;
+      });
+      sec.style.display = secVisible ? '' : 'none';
+      if (secVisible) anyVisible = true;
+    });
+    noresults.style.display = anyVisible ? 'none' : 'block';
+  });
+</script>
+</body>
+</html>
