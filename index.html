@@ -119,10 +119,6 @@
   }
   .modal .go-btn:hover { background: var(--caramel-dark); }
   .modal .go-btn:disabled { opacity: .6; cursor: wait; }
-  .modal .skip {
-    display: block; width: 100%; text-align: center; margin-top: 10px; background: none; border: none;
-    color: var(--brown-soft); font-size: .88rem; cursor: pointer; font-family: inherit; text-decoration: underline;
-  }
   .modal .fnote { display: none; font-size: .82rem; color: var(--brown-soft); margin-top: 10px; text-align: center; }
 </style>
 </head>
@@ -456,7 +452,7 @@
   <div class="modal">
     <h2 id="mtitle">One quick step</h2>
     <div class="mstore" id="mstore"></div>
-    <p>Apna naam aur mobile number de dijiye — Dohful aapko naye cookies aur offers ki khabar WhatsApp par bhejega. Phir seedha Google review khul jayega.</p>
+    <p>Please share your name and mobile number — Dohful will send you new cookie alerts and offers on WhatsApp. Your Google review opens right after.</p>
     <form id="leadform" novalidate>
       <label for="fname">Your name *</label>
       <input type="text" id="fname" autocomplete="name" placeholder="e.g. Rahul Sharma">
@@ -468,7 +464,6 @@
       <button type="submit" class="go-btn" id="fgo">Continue to Google review →</button>
       <div class="fnote" id="fnote"></div>
     </form>
-    <button class="skip" id="fskip" type="button">Skip — seedha review par jao</button>
   </div>
 </div>
 
@@ -501,7 +496,6 @@
 
   function goReview() { window.location.href = current.review; }
 
-  document.getElementById('fskip').addEventListener('click', function () { if (current) goReview(); });
   overlay.addEventListener('click', function (e) { if (e.target === overlay) overlay.classList.remove('open'); });
 
   form.addEventListener('submit', function (e) {
@@ -514,14 +508,14 @@
     ferr.style.display = 'none';
     if (!name) { ferr.textContent = 'Please enter your name.'; ferr.style.display = 'block'; return; }
     if (!/^\d{10}$/.test(mobile)) { ferr.textContent = 'Please enter a valid 10-digit mobile number.'; ferr.style.display = 'block'; return; }
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { ferr.textContent = 'Email sahi nahi lag raha — check karke phir try kijiye, ya khaali chhod dijiye.'; ferr.style.display = 'block'; return; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { ferr.textContent = 'That email doesn\u2019t look right \u2014 please check it and try again, or leave it blank.'; ferr.style.display = 'block'; return; }
     fgo.disabled = true;
     fgo.textContent = 'Saving\u2026';
     var done = false;
     function finish(ok) {
       if (done) return; done = true;
       if (ok) { goReview(); return; }
-      fnote.textContent = 'Details save nahi ho paye — koi baat nahi, review page khul raha hai\u2026';
+      fnote.textContent = 'Your details couldn\u2019t be saved \u2014 no problem, opening the review page\u2026';
       fnote.style.display = 'block';
       setTimeout(goReview, 1200);
     }
